@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2016-2021, The Linux Foundation. All rights reserved.
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <linux/clk.h>
@@ -749,8 +749,8 @@ static const char *const usb_ch_text[] = {"One", "Two", "Three", "Four",
 					   "Five", "Six", "Seven",
 					   "Eight"};
 static char const *tdm_sample_rate_text[] = {"KHZ_8", "KHZ_16", "KHZ_32",
-					     "KHZ_48", "KHZ_96",
-					     "KHZ_176P4", "KHZ_352P8"};
+					     "KHZ_48", "KHZ_176P4",
+					     "KHZ_352P8"};
 static char const *tdm_bit_format_text[] = {"S16_LE", "S24_LE", "S32_LE"};
 static char const *tdm_ch_text[] = {"One", "Two", "Three", "Four",
 				    "Five", "Six", "Seven", "Eight"};
@@ -4944,7 +4944,6 @@ static int lahaina_tdm_snd_hw_params(struct snd_pcm_substream *substream,
 	struct msm_asoc_mach_data *pdata = NULL;
 
 	pr_debug("%s: dai id = 0x%x\n", __func__, cpu_dai->id);
-
 	pdata = snd_soc_card_get_drvdata(rtd->card);
 	slots = pdata->tdm_max_slots;
 	if (cpu_dai->id < AFE_PORT_ID_TDM_PORT_RANGE_START) {
@@ -4980,6 +4979,7 @@ static int lahaina_tdm_snd_hw_params(struct snd_pcm_substream *substream,
 		pr_err("%s: tdm config is NULL\n", __func__);
 		return -EINVAL;
 	}
+
 	slot_offset = config->tdm_slot_offset;
 	if (!slot_offset) {
 		pr_err("%s: slot offset is NULL\n", __func__);
